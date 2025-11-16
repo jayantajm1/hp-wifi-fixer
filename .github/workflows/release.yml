@@ -1,0 +1,47 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create EXE
+        run: |
+          # Create the EXE using IExpress
+          @echo off
+          set SEDFILE=release.sed
+          (
+            echo [Version]
+            echo Class=IEXPRESS
+            echo SEDVersion=3
+            echo [Options]
+            echo PackagePurpose=InstallApp
+            echo ShowInstallProgramWindow=0
+            echo HideExtractAnimation=1
+            echo UseLongFileName=1
+            echo TargetName=HP_WiFi_Fixer_Pro.exe
+            echo FriendlyName=HP WiFi Fixer Pro
+            echo AppLaunched=wif_fixer_pro.bat
+            echo SourceFiles=SourceFiles
+            echo [SourceFiles]
+            echo SourceFiles0=.
+            echo [SourceFiles0]
+            echo %%FILE0%%=wif_fixer_pro.bat
+          ) > %SEDFILE%
+
+          iexpress /n /q /m %SEDFILE%
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: HP_WiFi_Fixer_Pro.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

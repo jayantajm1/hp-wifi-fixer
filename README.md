@@ -28,7 +28,7 @@ The HP WiFi Fixer Pro performs a complete driver reset in 5 simple steps:
 ## 📥 Download & Setup
 
 ### Method 1: Ready-to-Use EXE
-1. Download `HP_WiFi_Fixer_Pro.exe` from [Releases](#)
+1. Download `HP_WiFi_Fixer_Pro.exe` from [Releases](https://github.com/jayantajm1/hp-wifi-fixer/blob/main/release/v1.0.0/)
 2. Download WiFi driver from [HP Support](https://support.hp.com/us-en/drivers/laptops)
 3. Rename driver to `wifi-driver.exe`
 4. Place both files in same folder
